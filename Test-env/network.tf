@@ -23,7 +23,7 @@ resource "aws_subnet" "private-sub-1" {
   availability_zone = "eu-west-1a"
 
   tags = {
-    Name = "Privat Subnet 1"
+    Name = "Private Subnet 1"
   }
 }
 //Gateways
