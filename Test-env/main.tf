@@ -1,8 +1,4 @@
 //It's good practice to name the name file, main.tf
-provider "aws" {
-    region = "eu-west-1"
-}
-
 resource "aws_s3_bucket" "my-test-bucket" {
   bucket = "terraform-bucket-101010"
 }
