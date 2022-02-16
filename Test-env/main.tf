@@ -1,9 +1,9 @@
 //It's good practice to name the name file, main.tf
 
 //S3 Buckets
-resource "aws_s3_bucket" "my-test-bucket" {
+/* resource "aws_s3_bucket" "my-test-bucket" {
   bucket = "terraform-bucket-101010"
-}
+} */
 
 //EC2 instances
 resource "aws_instance" "web-bastion" {
@@ -45,4 +45,27 @@ resource "aws_instance" "back-end-host" {
   }
 }
 
+//RDS
+resource "aws_db_instance" "test-db" {
+  allocated_storage    = 5
+  engine               = "postgres"
+  engine_version       = "13.4"
+  instance_class       = "db.t3.micro"
+  db_name              = "mydb"
+  username             = "avidigal"
+  password             = "pass12345678"
+  publicly_accessible  = true
+  parameter_group_name = aws_db_parameter_group.db_test_group.name 
+  skip_final_snapshot  = true
+  db_subnet_group_name = aws_db_subnet_group.data-sub-1.id 
+  vpc_security_group_ids = [aws_security_group.front_access.id]
+}
+resource "aws_db_parameter_group" "db_test_group" {  
+  name   = "dbgroup"  
+  family = "postgres13"
+  parameter {    
+    name  = "log_connections"    
+    value = "1"  
+  }
+} 
 

@@ -6,6 +6,10 @@ variable "pub1" {
     type = string
     description = "Public Subnet 1"
 }
+variable "pub2" {
+    type = string
+    description = "Public Subnet 2"
+}
 variable "priv1" {
     type = string
     description = "Private Subnet 1"
