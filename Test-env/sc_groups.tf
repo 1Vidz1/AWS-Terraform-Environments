@@ -7,22 +7,39 @@ resource "aws_security_group" "front_access" {
     Name = "front-access"
   }
 }
-resource "aws_security_group_rule" "http" {
+resource "aws_security_group_rule" "pub1-http" {
   type              = "ingress"
     from_port        = 80
     to_port          = 80
     protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
-    security_group_id = aws_security_group.front-access.id
+    security_group_id = aws_security_group.front_access.id
 }
-resource "aws_security_group_rule" "ssh" {
+resource "aws_security_group_rule" "pub1-ssh" {
   type              = "ingress"
     from_port        = 22
     to_port          = 22
     protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
-    security_group_id = aws_security_group.front-access.id
+    security_group_id = aws_security_group.front_access.id
 }
+resource "aws_security_group_rule" "postgre" {
+  type              = "ingress"
+    from_port        = 5432
+    to_port          = 5432
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+    security_group_id = aws_security_group.front_access.id
+}
+resource "aws_security_group_rule" "outbound" {
+  type              = "egress"
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+    security_group_id = aws_security_group.front_access.id
+}
+
 
 ///////////////////
 
@@ -35,7 +52,7 @@ resource "aws_security_group" "back-end-sg" {
     Name = "back-end-sg"
   }
 }
-resource "aws_security_group_rule" "ssh_bastion" {
+resource "aws_security_group_rule" "priv1-ssh" {
   type              = "ingress"
   from_port         = 22
   to_port           = 22
