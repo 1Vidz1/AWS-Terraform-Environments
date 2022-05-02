@@ -1,7 +1,8 @@
 provider "aws" {
-    region = "eu-west-1"
+    region = var.AWS_Region
 }
 
+##Change locals!
 locals {
   name   = "hv-aws"
   region = "eu-west-1"
