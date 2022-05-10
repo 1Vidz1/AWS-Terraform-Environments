@@ -1,7 +1,7 @@
 variable "region" {
     type = string
     description = "AWS Region"
-    default = "eu-west-1"
+    //default = "eu-west-1"
 }
 variable "vpc_cidr" {
     type = string
